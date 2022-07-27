@@ -1,63 +1,89 @@
 <section class="container">
+  <h2 class="heading">Angular Materials</h2>
 
-    <h2 class="heading">Angular Materials</h2>
+  <div class="tabClass">
+    <mat-tab-group mat-stretch-tabs>
+      <!-- Log -In -->
+      <mat-tab label="Log In">
+        <mat-card class="signInCard">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+            <!-- Email -->
+            <mat-form-field appearance="outline" style="margin-top: 10%;">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="Email" />
+              <mat-error
+                *ngIf="AllControls?.Email?.errors?.['email']&&submitted"
+                >Invalid Email</mat-error
+              >
+              <mat-error
+                *ngIf="AllControls?.Email?.errors?.['required']&&submitted"
+                >Require Email</mat-error
+              >
+            </mat-form-field>
 
-    <div class="tabClass">   
+            <!-- Password -->
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="Password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? 'visibility_off' : 'visibility'
+                }}</mat-icon>
+              </button>
+              <mat-error
+                *ngIf="AllControls?.Password?.errors?.['required']&&submitted"
+                >Require Password</mat-error
+              >
+            </mat-form-field>
 
-        <mat-tab-group mat-stretch-tabs>
+            <!-- Login Button -->
+            <div style="text-align: center;">
+              <button mat-raised-button color="primary" type="submit">
+                Log In
+              </button>
+              <button mat-raised-button color="accent" type="reset">
+                Reset
+              </button>
+            </div>
+          </form>
+        </mat-card>
+      </mat-tab>
 
-            <!-- Log -In -->
-            <mat-tab label="Log In">
+      <!-- Sign -In -->
 
-                
-                <mat-card class="signInCard">
-                    
-                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
-                    
-                        <!-- Email -->
-                        <mat-form-field appearance="outline" style="margin-top: 10%;">
-                            <mat-label>Email</mat-label>
-                            <input matInput placeholder="Email" formControlName="Email">
-                            <mat-error *ngIf="AllControls?.Email?.errors?.['email']&&submitted">Invalid Email</mat-error>
-                        </mat-form-field>
-
-                        <!-- Password -->
-                        <mat-form-field appearance="outline">
-                            <mat-label>Password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                        </mat-form-field>
-
-                        <!-- Login Button -->
-                        <div style="text-align: center;">
-                            <button mat-raised-button color="primary" type="submit">Log In</button>
-                            <button mat-raised-button color="accent" type="reset">Reset</button>
-                        </div>
-
-                    </form>
-
-                </mat-card>
-            </mat-tab>
-            
-            <!-- Sign -In -->
-
-
-            <!-- Sign Up -->
-            <mat-tab label="Sign Up">
-
-            </mat-tab>
-            <!-- Sign Up -->
-
-        </mat-tab-group>
-
-    </div>
+      <!-- Sign Up -->
+      <mat-tab label="Sign Up">
+        <mat-card class="signUpCard">
+          <form>
 
 
+            <!-- First Name -->
+            <mat-form-field appearance="outline" style="margin-top: 10%;">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="firstName" />
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="lastName" />
+            </mat-form-field>
 
 
-
-
-
+          </form>
+        </mat-card>
+      </mat-tab>
+      <!-- Sign Up -->
+    </mat-tab-group>
+  </div>
 </section>
