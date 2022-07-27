@@ -28,3 +28,17 @@ button {
   margin-left: 4%;
   margin-right: 4%;
 }
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+	opacity: 0.5 !important;     /*click effect color change*/
+	background-color: rgba(255, 255, 255, 0) !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+	background-color: #283593!important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+	border-color:#283593!important; /*outer ring color change*/
+}
+

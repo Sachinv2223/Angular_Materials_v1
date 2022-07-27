@@ -1,89 +1,174 @@
 <section class="container">
-  <h2 class="heading">Angular Materials</h2>
+    <h2 class="heading">Angular Materials</h2>
 
-  <div class="tabClass">
-    <mat-tab-group mat-stretch-tabs>
-      <!-- Log -In -->
-      <mat-tab label="Log In">
-        <mat-card class="signInCard">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
-            <!-- Email -->
-            <mat-form-field appearance="outline" style="margin-top: 10%;">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Email" formControlName="Email" />
-              <mat-error
-                *ngIf="AllControls?.Email?.errors?.['email']&&submitted"
-                >Invalid Email</mat-error
-              >
-              <mat-error
-                *ngIf="AllControls?.Email?.errors?.['required']&&submitted"
-                >Require Email</mat-error
-              >
-            </mat-form-field>
+    <div class="tabClass">
+        <mat-tab-group mat-stretch-tabs>
+            <!-- Log -In -->
+            <mat-tab label="Log In">
+                <mat-card class="signInCard">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+                        <!-- Email -->
+                        <mat-form-field appearance="outline" style="margin-top: 10%;">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" formControlName="Email" />
+                            <mat-error *ngIf="AllControls?.Email?.errors?.['email']&&submitted">Invalid Email
+                            </mat-error>
+                            <mat-error *ngIf="AllControls?.Email?.errors?.['required']&&submitted">Require Email
+                            </mat-error>
+                        </mat-form-field>
 
-            <!-- Password -->
-            <mat-form-field appearance="outline">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                [type]="hide ? 'password' : 'text'"
-                formControlName="Password"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="hide = !hide"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide"
-              >
-                <mat-icon>{{
-                  hide ? 'visibility_off' : 'visibility'
-                }}</mat-icon>
-              </button>
-              <mat-error
-                *ngIf="AllControls?.Password?.errors?.['required']&&submitted"
-                >Require Password</mat-error
-              >
-            </mat-form-field>
+                        <!-- Password -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password" />
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{
+                                    hide ? 'visibility_off' : 'visibility'
+                                    }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="AllControls?.Password?.errors?.['required']&&submitted">Require Password
+                            </mat-error>
+                        </mat-form-field>
 
-            <!-- Login Button -->
-            <div style="text-align: center;">
-              <button mat-raised-button color="primary" type="submit">
-                Log In
-              </button>
-              <button mat-raised-button color="accent" type="reset">
-                Reset
-              </button>
-            </div>
-          </form>
-        </mat-card>
-      </mat-tab>
+                        <!-- Login Button -->
+                        <div style="text-align: center; margin-top: 3%;">
+                            <button mat-raised-button color="primary" type="submit">
+                                Log In
+                            </button>
+                            <button mat-raised-button color="accent" type="reset">
+                                Reset
+                            </button>
+                        </div>
+                    </form>
+                </mat-card>
+            </mat-tab>
 
-      <!-- Sign -In -->
+            <!-- Sign -In -->
 
-      <!-- Sign Up -->
-      <mat-tab label="Sign Up">
-        <mat-card class="signUpCard">
-          <form>
+            <!-- Sign Up -->
+            <mat-tab label="Sign Up">
+                <mat-card class="signUpCard">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignup(signupForm)">
 
 
-            <!-- First Name -->
-            <mat-form-field appearance="outline" style="margin-top: 10%;">
-              <mat-label>First Name</mat-label>
-              <input matInput placeholder="firstName" />
-            </mat-form-field>
+                        <!-- First Name -->
+                        <mat-form-field appearance="outline" style="margin-top: 10%;">
+                            <mat-label>First Name</mat-label>
+                            <input matInput placeholder="First Name" formControlName="firstName" />
+                            <mat-error *ngIf="AllSignupControls?.['firstName']?.errors?.['minLength']&&submittedSignup">
+                                First Name should be atleast 3 characters
+                            </mat-error>
+                            <mat-error *ngIf="AllSignupControls?.['firstName']?.errors?.['required']&&submittedSignup">
+                                Require First Name
+                            </mat-error>
+                        </mat-form-field>
 
-            <!-- Last Name -->
-            <mat-form-field appearance="outline">
-              <mat-label>Last Name</mat-label>
-              <input matInput placeholder="lastName" />
-            </mat-form-field>
+                        <!-- Last Name -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput placeholder="Last Name" formControlName="lastName" />
+                            <mat-error *ngIf="AllSignupControls?.['lastName']?.errors?.['minLength']&&submittedSignup">Last
+                                Name should be atleast 3 characters
+                            </mat-error>
+                            <mat-error *ngIf="AllSignupControls?.['lastName']?.errors?.['required']&&submittedSignup">
+                                Require Last Name
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Age -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Age</mat-label>
+                            <input matInput placeholder="Age" type="number" formControlName="age" />
+                            <mat-error *ngIf="AllSignupControls?.['age']?.errors?.['required']&&submittedSignup">Require Age
+                            </mat-error>
+                            <mat-error *ngIf="AllSignupControls?.['age']?.errors?.['min']&&submittedSignup">Age should be greater than 0
+                            </mat-error>
+                            <mat-error *ngIf="AllSignupControls?.['age']?.errors?.['max']&&submittedSignup">Age should be less than 100
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Gender -->
+                        <mat-radio-group aria-label="Gender" formControlName="gender">
+                            <mat-radio-button value="male" style="margin-right: 5%; padding-top: 1%;">Male
+                            </mat-radio-button>
+                            <mat-radio-button value="female">Female</mat-radio-button>
+                            <mat-error style="font-size: 10.5px; padding-left: 10.5px;"
+                                *ngIf="AllSignupControls?.['gender']?.errors?.['required']&&submittedSignup">Require Gender
+                            </mat-error>
+                        </mat-radio-group>
 
 
-          </form>
-        </mat-card>
-      </mat-tab>
-      <!-- Sign Up -->
-    </mat-tab-group>
-  </div>
+                        <!-- Date of birth -->
+                        <mat-form-field appearance="outline" style="margin-top: 5%;">
+                            <mat-label>Date of Birth (MM/DD/YYYY)</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="DOB">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="AllSignupControls?.['DOB']?.errors?.['required']&&submittedSignup">Require
+                                Date of Birth
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Select tag -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Role</mat-label>
+                            <mat-select formControlName="role">
+                                <mat-option>None</mat-option>
+                                <mat-option *ngFor="let item of roles" [value]="item.id">
+                                    {{item.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                         <!-- Password -->
+                         <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="signuphide ? 'password' : 'text'" formControlName="password1" />
+                            <button mat-icon-button matSuffix (click)="signuphide = !signuphide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="signuphide">
+                                <mat-icon>{{
+                                    signuphide ? 'visibility_off' : 'visibility'
+                                    }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="AllSignupControls?.['password1']?.errors?.['required']&&submittedSignup">Require Password
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!--Confirm Password -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput [type]="signuphide ? 'password' : 'text'" formControlName="password2" />
+                            <button mat-icon-button matSuffix (click)="signuphide = !signuphide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="signuphide">
+                                <mat-icon>{{
+                                    signuphide ? 'visibility_off' : 'visibility'
+                                    }}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="AllSignupControls?.['password2']?.errors?.['required']&&submittedSignup">Require Password Again
+                            </mat-error>
+                            <mat-error *ngIf="AllSignupControls?.['password2']?.errors?.['passwordMismatch']&&submittedSignup">Password Mismatch
+                            </mat-error>
+                        </mat-form-field>
+
+
+
+
+                        <!-- Sign Up Button -->
+                        <div style="text-align: center; margin-top: 3%;">
+                            <button mat-raised-button color="primary" type="submit">
+                                Sign Up
+                            </button>
+                            <button mat-raised-button color="accent" type="reset">
+                                Reset
+                            </button>
+                        </div>
+
+                       
+                    </form>
+                </mat-card>
+            </mat-tab>
+            <!-- Sign Up -->
+        </mat-tab-group>
+    </div>
 </section>
